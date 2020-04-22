@@ -4,17 +4,13 @@ import com.example.backendcodingchallenge.model.Language;
 import com.example.backendcodingchallenge.model.Repository;
 import com.example.backendcodingchallenge.model.Response;
 import kong.unirest.Unirest;
-import kong.unirest.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -44,8 +40,35 @@ public class RepoService {
                 .getBody();
 
 
-        return response.getItems();
+        return response.getItems() == null ? new ArrayList<>():response.getItems();
     }
-    
+
+
+    public Optional<List<Language>> getLanguages(){
+
+        // retrieve repos list
+        List<Repository> repos = getRepos();
+
+        if(repos.isEmpty()) return Optional.empty();
+
+        Map<String,List<Repository>> map = repos
+                .stream()
+                .filter(repository -> repository.getLanguage()!=null) // filter repos with language=null
+                .collect(Collectors.groupingBy(Repository::getLanguage, Collectors.toList())); // groupBy language the results
+
+        List<Language> list = new ArrayList<>();
+
+
+        //create for each language a proper object and add it to the list
+        map.forEach((k,v)-> {
+            list.add(Language.builder()
+                    .name(k)
+                    .repositories(v)
+                    .repos_count(v.size())
+                    .build());
+        });
+
+        return Optional.of(list);
+    }
 
 }

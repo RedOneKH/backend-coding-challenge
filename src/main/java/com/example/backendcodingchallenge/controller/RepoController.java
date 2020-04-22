@@ -4,12 +4,14 @@ import com.example.backendcodingchallenge.model.Language;
 import com.example.backendcodingchallenge.model.Repository;
 import com.example.backendcodingchallenge.service.RepoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.UnsupportedEncodingException;
-import java.util.List;
+import java.util.*;
 
 /**
  * User: RedOne
@@ -29,9 +31,14 @@ public class RepoController {
     }
 
 
-    @GetMapping("/")
-    public List<Language> getRepos() {
-        return repoService.getLanguages();
+    @GetMapping("")
+    public ResponseEntity<List<Language>> getRepos() {
+
+        // return response with status OK if there is content
+
+        return repoService.getLanguages()
+                .map(languages -> new ResponseEntity<>(languages, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT));
     }
 
 }
