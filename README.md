@@ -37,6 +37,31 @@ Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/
 mvn spring-boot:run
 ```
 
+## Test the App
+
+You can test the app by running :
+```shell
+mvn test
+```
+### Test Result
+
+```
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  28.604 s
+[INFO] ------------------------------------------------------------------------
+
+
+```
 # REST API
 
 The REST API to the this app is described below.
@@ -78,7 +103,7 @@ The REST API to the this app is described below.
     ]
     
    
-## Files and Directories
+# Files and Directories
 
 The project (a.k.a. project directory) has a particular directory structure. A representative project is shown below:
 
@@ -104,7 +129,7 @@ The project (a.k.a. project directory) has a particular directory structure. A r
 └── README.md
 ```
 
-## packages
+# packages
 
 - `model` — to hold our entities;
 - `service` — to hold our business logic;
@@ -114,6 +139,6 @@ The project (a.k.a. project directory) has a particular directory structure. A r
 
 - `pom.xml` - contains all the project dependencies
 
-## Copyright
+# Copyright
 
 Radouane KHOUADRI
