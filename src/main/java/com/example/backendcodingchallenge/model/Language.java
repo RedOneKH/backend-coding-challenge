@@ -10,6 +10,7 @@ import java.util.List;
  * User: KaiTo
  * Date: 4/22/2020
  * Time: 6:00 PM
+ * Bean holds Language used by repositories
  */
 @Builder
 @Data

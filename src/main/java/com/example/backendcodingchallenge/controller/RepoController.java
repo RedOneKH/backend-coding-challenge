@@ -20,7 +20,7 @@ import java.util.*;
  */
 
 @RestController
-@RequestMapping("/api/repository")
+@RequestMapping("/api/languages")
 public class RepoController {
 
 
